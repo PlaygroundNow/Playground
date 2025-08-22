@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/PlaygroundNow/Playground)
+
 # Playground (Beta) - Live code on the web!
 Start building on the public beta site at https://playground.now
 
