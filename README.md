@@ -43,12 +43,12 @@ A world is a canvas made of blocks. This canvas is powerful because blocks persi
 4. Add events to your block:  
    1. Use **Code** in the right-click menu to add events to your block.  
    2. Try adding an alert to the click event of the button block by typing:  
-      ```html
+      ```javascript
       @click="alert('hi');"
       ```  
       The code inside will be evaluated on click.  
    3. For an input block you may want to use the input event:  
-      ```html
+      ```javascript
       @input="$name = props.value"
       ```  
       Whenever the input is typed in, the store variable `$name` will get set to the current value.  
