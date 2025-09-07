@@ -1,4 +1,4 @@
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/PlaygroundNow/Playground)
+[![Wiki](https://img.shields.io/badge/wiki-Documentation-blue)](../../wiki)
 
 # Playground (Beta) - Live code on the web!
 Start building on the public beta site at https://playground.now
@@ -93,3 +93,5 @@ this.emit('playground:event', {
   },
 });
 ```
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/PlaygroundNow/Playground)
