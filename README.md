@@ -9,7 +9,7 @@ Start building on the public beta site at https://playground.now
 
 Playground is a live coding environment built with modern web technologies:
 - Web Components (https://github.com/web-padawan/awesome-web-components)
-- Block (Vue.js-like frontend framework)
+- Block (Alpine.js powered frontend framework)
 - Deno Scripts (https://deno.com)
 - Tailwind CSS (https://tailwindcss.com)
 
