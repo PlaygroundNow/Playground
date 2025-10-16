@@ -1,0 +1,27 @@
+<div x-data="todo">
+  <input x-model="title" />
+  <button @click="todos.push(title)">Add todo</button>
+  <template x-for="todo in todos">
+    <div x-text="todo"></div>
+  </template>
+</div>
+
+<style>
+  div {
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 4px;
+    background: cornflowerblue;
+    color: white;
+  }
+</style>
+
+<script>
+  window.Alpine &&
+    Alpine.data("todo", () => ({
+      todos: [],
+      title: "",
+
+      init() {},
+    }));
+</script>

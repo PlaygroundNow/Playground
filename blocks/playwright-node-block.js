@@ -69,7 +69,7 @@ export default class PlaywrightNodeBlock extends Block {
         .map(([position]) => position);
 
       const block = window.blockTree[position]?.block;
-      this.store.tagName = block?.tagName;
+      this.store.tagName = block?.tagName?.toLowerCase();
     }
   }
 

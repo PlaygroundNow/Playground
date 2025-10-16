@@ -57,7 +57,7 @@
   function runScript({ contents, location, processId }) {
     if (contents && !processId) {
       const world = document.querySelector("world-block");
-      world.evaluate(`(function(){${contents}\n})();`);
+      world?.evaluate?.(`(function(){${contents}\n})();`);
     }
   }
 

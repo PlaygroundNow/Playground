@@ -44,6 +44,11 @@ export default class Code extends Block {
   <link
     rel="stylesheet"
     type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/theme/mdn-like.min.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/theme/material.min.css"
   />
   <textarea name="code"></textarea>
@@ -78,12 +83,16 @@ export default class Code extends Block {
         .assignedNodes()
         .map((n) => n.textContent)
         .join("");
+      
+      console.log(this.props.location);
 
       this.doc = CodeMirror.fromTextArea(this.html, {
         lineNumbers: true,
         tabSize: 2,
-        theme: "material",
-        mode: { name: "javascript", jsx: true },
+        theme: "mdn-like",
+        mode: this.props?.location?.endsWith('html') ?
+        	"htmlmixed" :
+        	{ name: "javascript", jsx: true },
         viewportMargin: Infinity,
         extraKeys: {
           "Cmd-S": () => {},
@@ -121,17 +130,28 @@ export default class Code extends Block {
         const [kit, type, filename, ext] = location.split(".");
 
         if (type !== "blocks") return;
-
-        import(`/kits/${kit}/${type}/${filename}.${ext}?cachebust=${new Date().getTime()}`).then((module) => {
-          customElements.define(filename, module.default);
-
-          document.querySelectorAll(filename).forEach((el) => {
-            const parent = el.parentElement;
-            el.remove();
-            parent.insertAdjacentHTML("beforeend", el.outerHTML);
+                
+        function refresh() {
+        	document.querySelectorAll(filename).forEach((el) => {
+              const clone = el.cloneNode(true);
+    					el.replaceWith(clone);
           });
-        });
-
+        }
+        
+        if (ext === 'js') {
+          import(`/kits/${kit}/${type}/${filename}.${ext}?cachebust=${new Date().getTime()}`).then((module) => {
+            customElements.define(filename, module.default);
+            refresh();
+          });
+        } else if (ext === 'html') {
+          fetch(`/kits/${kit}/${type}/${filename}?cachebust=${new Date().getTime()}`, { method: "GET", headers: { Accept: "text/html" } })
+            .then((res) => res.text())
+            .then((sfc) => {
+              alpineBlockSFC(filename, sfc);
+            	refresh();
+            });
+        }
+        
         const height = Math.min(4 + this.doc.lineCount() * 20, 800);
         this.doc.setSize("auto", height);
       });
@@ -150,7 +170,7 @@ export default class Code extends Block {
     this.doc = CodeMirror.fromTextArea(this.html, {
       lineNumbers: true,
       tabSize: 2,
-      theme: "material",
+      theme: "mdn-like",
       mode: "htmlmixed",
     });
 
